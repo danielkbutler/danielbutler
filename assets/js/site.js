@@ -21,3 +21,21 @@
   }, {threshold:.4});
   targets.forEach(function(el){ io.observe(el); });
 })();
+
+// Email links: many PCs have no default mail app, so mailto: does nothing.
+// Copy the address and confirm on screen, then still try to open the mail app.
+(function(){
+  var toast;
+  function show(msg){
+    if(!toast){ toast=document.createElement('div'); toast.className='toast'; toast.setAttribute('role','status'); document.body.appendChild(toast); }
+    toast.textContent=msg; toast.classList.add('is-on');
+    clearTimeout(toast._t); toast._t=setTimeout(function(){ toast.classList.remove('is-on'); }, 3200);
+  }
+  document.addEventListener('click', function(e){
+    var a=e.target.closest && e.target.closest('a[href^="mailto:"]'); if(!a) return;
+    var email=a.getAttribute('href').replace('mailto:','').split('?')[0];
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(email).then(function(){ show('Email copied: '+email); }, function(){ show(email); });
+    } else { show(email); }
+  });
+})();
