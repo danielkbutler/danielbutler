@@ -4,9 +4,9 @@ Static site for GitHub Pages. No build step: every page is plain HTML sharing `a
 
 ## Before publishing
 1. Find every placeholder: search the repo for `class="todo"`. They render as dashed vermilion boxes so you can also spot them visually.
-2. Replace `https://www.example.com` everywhere (canonical tags, schema, `sitemap.xml`, `robots.txt`) with your real URL.
-3. Replace `https://www.linkedin.com/in/YOUR-PROFILE` with your LinkedIn URL.
-4. Add your résumé PDF at `assets/Daniel-Butler-Resume.pdf`.
+2. Site URL is set to https://danielkbutler.github.io/danielbutler (update if you add a custom domain).
+3. LinkedIn URL is set.
+4. Résumé PDF is at assets/Daniel-Butler-Resume.pdf. Replace it when you update the résumé.
 5. On `writing.html`, replace the `#` link on the altitude post card with its real URL.
 
 ## Deploy
