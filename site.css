@@ -296,9 +296,11 @@ a:hover{color:var(--accent-hover)}
 .toast.is-on{opacity:1;transform:translate(-50%,0)}
 
 /* ---------- Home hero with illustrated portrait ---------- */
-.hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:center}
-.portrait{position:relative;margin:0;padding:24px 0 0 24px}
-.portrait::before{content:"";position:absolute;left:24px;right:0;top:48px;bottom:0;background:var(--accent)}
-.portrait__frame{position:absolute;left:0;right:24px;top:24px;bottom:24px;border:1.5px solid var(--ink-900);pointer-events:none}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:48px;align-items:start}
+.hero .display{max-width:1000px}
+.portrait{position:relative;margin:0;width:280px;padding:14px 0 0 14px}
+.portrait::before{content:"";position:absolute;left:14px;right:0;top:28px;bottom:0;background:var(--accent)}
+.portrait__frame{position:absolute;left:0;right:14px;top:14px;bottom:14px;border:1.5px solid var(--ink-900);pointer-events:none}
 .portrait img{position:relative;display:block;width:100%;height:auto}
-@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr);gap:48px}.portrait{max-width:440px}}
+@media (max-width:1100px){.portrait{width:220px}}
+@media (max-width:760px){.hero{grid-template-columns:minmax(0,1fr);gap:32px}.portrait{width:200px;grid-row:1}}
