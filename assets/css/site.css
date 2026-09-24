@@ -187,10 +187,10 @@ a:hover{color:var(--accent-hover)}
 .card__arrow{width:36px;height:36px;flex:none;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--ink-900);color:var(--ink-950);transition:background var(--dur-fast)}
 .card__arrow .icon{width:18px;height:18px}
 .card:hover .card__arrow{background:var(--accent)}
-.card--wide{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:end;min-height:320px;padding:36px}
+.card--wide{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-rows:auto 1fr;gap:28px 48px;align-items:start;padding:36px}
 .card--wide .card__top{grid-column:1/-1;align-self:start}
 .card--wide .card__title{font-size:36px}
-.card--wide .card__text{display:flex;flex-direction:column;gap:22px;height:100%;justify-content:flex-end}
+.card--wide .card__text{display:flex;flex-direction:column;gap:22px;height:100%}
 @media (max-width:900px){.card--wide{display:flex;min-height:0;padding:28px}.card--wide .card__title{font-size:var(--h3)}}
 
 /* ---------- Before / after ---------- */
@@ -248,7 +248,8 @@ a:hover{color:var(--accent-hover)}
 .tool ul{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:15px}
 .tool li{padding-left:18px;position:relative}
 .tool li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:1.5px;background:var(--accent)}
-.tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.band .tool p{color:var(--text-body)}
 @media (max-width:1000px){.tools{grid-template-columns:minmax(0,1fr)}}
 
 /* ---------- Ledger (résumé) ---------- */
