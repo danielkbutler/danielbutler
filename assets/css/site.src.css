@@ -24,7 +24,7 @@
 --text-strong:var(--ink-900);--text-body:var(--ink-700);--text-muted:var(--ink-500);--text-faint:var(--ink-400);
 --text-inverse:var(--paper-50);--text-inverse-muted:var(--ink-300);--text-accent:var(--vermilion-600);
 --border-inverse:var(--ink-700);
---accent:var(--vermilion-500);--accent-hover:var(--vermilion-600);--accent-tint:var(--vermilion-50);
+--accent:var(--vermilion-500);--water:#CDE3EA;--water-deep:#8FBACB;--accent-hover:var(--vermilion-600);--accent-tint:var(--vermilion-50);
 --radius-sm:2px;--radius-md:6px;--radius-pill:999px;
 --rule-hair:1px;--rule-bold:2px;--rule-heavy:6px;
 --shadow-offset:4px 4px 0 var(--ink-900);--shadow-offset-accent:4px 4px 0 var(--vermilion-500);
@@ -271,7 +271,7 @@ a:hover{color:var(--accent-hover)}
 .footer__h{font-size:var(--display-1);line-height:var(--display-leading);letter-spacing:var(--display-tracking);color:var(--paper-50);max-width:860px}
 .footer__bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--border-inverse);padding-top:16px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-400)}
 
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}.js .ba__fill{width:var(--w)}.js .card{opacity:1;translate:none}.js .hero__h .hl{background-size:100% 32%}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}.js .ba__fill{width:var(--w)}.js .card{opacity:1;translate:none}.js .hero__h .hl{background-size:100% 32%}.serp__q::after,.fl-bob,.fl-wind i,.gust{animation:none!important}.js .fl-mover{transform:translateX(100%)}.js .fl-a{opacity:1;transform:none}.js .serp__client{transform:none}.js .serp__aio>*{opacity:1}.js .sc-row,.js .sc-client{transform:translateY(var(--y1))}.river__mover{animation:none!important}.horizon *,.rail-art *,.rail .step__num,.rail .step__line{animation:none!important}.js .pager__marker{transform:none}.rail-crumple{opacity:1}.rail-sway{opacity:0}}
 @media print{.nav,.footer,.btn{display:none!important}.band{background:none;color:var(--ink-900)}}
 
 /* ---------- Step column aligned to section eyebrow ---------- */
@@ -319,10 +319,10 @@ a:hover{color:var(--accent-hover)}
 .js .hero__h .hl{background-size:0% 32%;animation:hl-grow 750ms var(--ease-out) 350ms forwards}
 @keyframes hl-grow{to{background-size:100% 32%}}
 
-/* 3. Tactile cards: soft lift on hover/focus, arrow nudges 5px. */
+/* 3. Tactile cards: design-system offset lift on hover/focus, arrow nudges 5px. */
 .card{transition:transform 240ms var(--ease-out),box-shadow 240ms var(--ease-out),opacity 600ms var(--ease-out) var(--d,0ms),translate 600ms var(--ease-out) var(--d,0ms)}
-@media (hover:hover){.card:hover{color:inherit;transform:translateY(-6px);box-shadow:0 22px 40px -22px rgba(21,20,18,.45),0 2px 6px rgba(21,20,18,.06)}}
-.card:focus-visible{transform:translateY(-6px);box-shadow:0 22px 40px -22px rgba(21,20,18,.45)}
+@media (hover:hover){.card:hover{color:inherit;transform:translate(-3px,-3px);box-shadow:var(--shadow-offset)}.card--featured:hover{box-shadow:var(--shadow-offset-accent)}}
+.card:focus-visible{transform:translate(-3px,-3px);box-shadow:var(--shadow-offset)}
 .nowrap{white-space:nowrap}
 .card__go{display:inline-block;width:.72em;height:.72em;margin-left:.28em;vertical-align:-.04em;fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform 240ms var(--ease-out)}
 .card:hover .card__go,.card:focus-visible .card__go{transform:translateX(5px)}
@@ -340,3 +340,303 @@ a:hover{color:var(--accent-hover)}
    vermilion to pass WCAG AA (4.5:1). Bright vermilion stays on ink. */
 .acc{color:var(--vermilion-700)}
 .band .acc,.sh--inverse .acc,.footer .acc,.nav__name .acc{color:var(--accent)}
+
+/* =====================================================================
+   Case study animations. SVG + transform/opacity/stroke only: no layout
+   work, zero CLS. Each has a finished static state for reduced motion and
+   for browsers without support.
+   ===================================================================== */
+
+/* ---------- Search results climb (healthcare case study) ---------- */
+.serp{margin:0;background:var(--surface-card);border:1.5px solid var(--ink-900);box-shadow:var(--shadow-offset);padding:20px;display:flex;flex-direction:column;gap:14px;max-width:560px}
+.serp__bar{display:flex;align-items:center;gap:10px;height:40px;padding:0 16px;border:1.5px solid var(--ink-300);border-radius:var(--radius-pill);font-family:var(--font-mono);font-size:12px;color:var(--text-muted)}
+.serp__bar svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--ink-500);stroke-width:2;stroke-linecap:round}
+.serp__aio{display:flex;flex-direction:column;gap:8px;padding:14px 16px;background:var(--accent-tint);border:1px solid var(--vermilion-100)}
+.serp__tag{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--vermilion-700)}
+.sk{display:block;height:8px;background:var(--paper-200);border-radius:2px}
+.serp__aio .sk{background:var(--vermilion-100)}
+.sk--90{width:90%}.sk--75{width:75%}.sk--70{width:70%}.sk--65{width:65%}.sk--60{width:60%}.sk--55{width:55%}
+.serp__src{display:flex;align-items:center;gap:8px;margin-top:4px;flex-wrap:wrap}
+.serp__srclbl{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+.serp__chip{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:var(--radius-pill);background:var(--accent);color:var(--ink-950);font-size:12px;font-weight:600;border:1.5px solid var(--ink-900)}
+.serp__chip--other{width:56px;background:var(--paper-0);border-color:var(--vermilion-100)}
+.serp__list{position:relative;display:grid;grid-template-rows:repeat(3,44px) 52px 54px;overflow:hidden}
+.serp__row{display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--paper-200)}
+.serp__rk{flex:none;width:36px;font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--text-muted);font-variant-numeric:tabular-nums}
+.serp__row .sk{flex:1;max-width:70%}
+.serp__slot{border:1.5px dashed var(--ink-300);margin:6px 0}
+.serp__below{display:flex;align-items:flex-end;padding-bottom:4px;justify-content:flex-end;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--text-muted)}
+.serp__client{position:absolute;left:0;right:0;top:138px;height:40px;display:flex;align-items:center;gap:14px;padding:0 10px;background:var(--surface-card);border:1.5px solid var(--ink-900)}
+.serp__rk--client{color:var(--vermilion-700);font-size:13px}
+.serp__ttl{display:flex;flex-direction:column;font-size:14px;font-weight:600;color:var(--text-strong);line-height:1.2}
+.serp__ttl small{font-size:11.5px;font-weight:400;color:var(--text-muted)}
+.js .serp__client{transform:translateY(58px);transition:transform 1500ms cubic-bezier(.3,.7,.2,1) 300ms}
+.js .serp__aio>*{opacity:0;transition:opacity 450ms var(--ease-out) 1900ms}
+.js .serp__aio>.serp__tag{opacity:1}
+.js .serp.is-in .serp__client{transform:none}
+.js .serp__below{transition:opacity 400ms var(--ease-out) 1200ms}
+.js .serp.is-in .serp__below{opacity:0}
+.js .serp.is-in .serp__aio>*{opacity:1}
+.js .serp.is-in .serp__chip:not(.serp__chip--other){animation:chip-pop 500ms var(--ease-out) 2300ms}
+@keyframes chip-pop{50%{transform:scale(1.12)}}
+
+/* ---------- River + raft on the River Expeditions steps ---------- */
+.river{position:relative}
+.river .step__line{background:transparent}
+.river__art{position:absolute;left:0;width:44px;top:14px;bottom:0;pointer-events:none}
+.river__svg{position:absolute;inset:0;width:44px;height:100%}
+.river__water{fill:none;stroke:var(--water);stroke-width:20;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.river__bank{fill:none;stroke:var(--ink-900);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.river__flow{fill:none;stroke:var(--paper-0);stroke-width:2;stroke-linecap:round;stroke-dasharray:3 22;vector-effect:non-scaling-stroke;animation:river-flow 1.8s linear infinite}
+.river__flow--b{stroke:var(--water-deep);stroke-dasharray:10 30;animation-duration:2.6s;animation-delay:-.7s}
+@keyframes river-flow{to{stroke-dashoffset:-50}}
+.river__track{position:absolute;left:0;right:0;top:0;bottom:56px}
+.river__mover{height:100%}
+.river__raft{position:absolute;left:7px;top:0;width:30px;height:42px;overflow:visible}
+.raft__hull{fill:var(--accent);stroke:var(--ink-900);stroke-width:2}
+.raft__floor{fill:var(--vermilion-300);stroke:var(--ink-900);stroke-width:1}
+.raft__head{fill:var(--ink-900)}
+.raft__paddle{stroke:var(--ink-900);stroke-width:2.5;stroke-linecap:round}
+.river .step__rail{position:relative;z-index:1}
+/* Scroll-driven: the raft drifts down as the steps scroll through view.
+   Browsers without scroll timelines keep the raft parked at the top. */
+@supports (animation-timeline:view()){
+  .river{view-timeline-name:--river}
+  .river__mover{animation:raft-drift linear both;animation-timeline:--river;animation-range:entry 70% exit 30%}
+  .river__raft{animation:raft-bob 2.4s ease-in-out infinite}
+}
+@keyframes raft-drift{from{transform:translateY(0)}to{transform:translateY(100%)}}
+@keyframes raft-bob{50%{transform:translateX(3px) rotate(6deg)}}
+@media (max-width:900px){.river__art{display:none}.river .step__line{background:var(--ink-900)}}
+
+
+/* =====================================================================
+   Integrated illustrations
+   ===================================================================== */
+/* Shared line-art vocabulary */
+.hz-ink15{stroke:var(--ink-900);stroke-width:1.5}
+.hz-ink2{stroke:var(--ink-900);stroke-width:2}
+.hz-ink25{stroke:var(--ink-900);stroke-width:2.5}
+.hz-ink3{stroke:var(--ink-900);stroke-width:3;stroke-linecap:round}
+.hz-nofill{fill:none}
+.hz-inkfill{fill:var(--ink-900)}
+.hz-head{fill:var(--paper-0);stroke:var(--ink-900);stroke-width:2.5}
+.hz-hat{fill:var(--accent);stroke:var(--ink-900);stroke-width:2}
+.hz-accent-line{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round}
+
+/* ---------- Header horizons: illustrations standing on the meta rule ---------- */
+.hero-rule{position:relative}
+.hero-rule .meta{border-top:1.5px solid var(--ink-900)}
+.hero-rule .meta>div{border-top:0}
+.hero-rule .horizon--ekg+.meta{border-top-color:transparent}
+.horizon{line-height:0;margin-bottom:-1px}
+.horizon svg{display:block;width:100%;height:auto;overflow:visible}
+.horizon:not(.is-playing) *{animation-play-state:paused!important}
+.hz-land{fill:var(--paper-100);stroke:var(--ink-900);stroke-width:2;stroke-linejoin:round}
+.hz-water{fill:none;stroke:var(--water-deep);stroke-width:2.5;stroke-linecap:round}
+.hz-flow{animation:hz-flow 5s linear infinite}
+@keyframes hz-flow{from{transform:translateX(0)}to{transform:translateX(88px)}}
+.hz-tree{fill:var(--paper-0);stroke:var(--ink-900);stroke-width:2;stroke-linejoin:round}
+.hz-pine{transform-box:fill-box;transform-origin:50% 100%;animation:sway 4s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+.hz-tent{fill:var(--accent);stroke:var(--ink-900);stroke-width:2.5;stroke-linejoin:round}
+.hz-flame{fill:var(--accent);stroke:var(--ink-900);stroke-width:2;transform-box:fill-box;transform-origin:50% 100%;animation:flicker .45s ease-in-out infinite alternate}
+@keyframes flicker{from{transform:scale(1,1)}to{transform:scale(.86,1.16)}}
+.hz-hull{fill:var(--accent);stroke:var(--ink-900);stroke-width:2.5;stroke-linejoin:round}
+.hz-bob{animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-3px) rotate(2deg)}}
+.hz-house{fill:var(--paper-0);stroke:var(--ink-900);stroke-width:2.5}
+.hz-roof{fill:var(--accent);stroke:var(--ink-900);stroke-width:2.5;stroke-linejoin:round}
+.hz-heart{fill:var(--paper-0);stroke:var(--ink-900);stroke-width:2;animation:beat 1.3s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 50%}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.15)}}
+.hz-kid{animation:kid-hop 1.6s ease-in-out infinite}
+@keyframes kid-hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hz-string{fill:none;stroke:var(--ink-500);stroke-width:1.5;stroke-dasharray:3 4}
+.hz-kiteb{fill:var(--accent);stroke:var(--ink-900);stroke-width:2}
+.hz-kite{animation:kite 3s ease-in-out infinite alternate}
+@keyframes kite{from{transform:translate(0,0) rotate(-8deg)}to{transform:translate(6px,-6px) rotate(10deg)}}
+.hz-bush{fill:var(--paper-100);stroke:var(--ink-900);stroke-width:2}
+/* Healthcare: the rule itself is a heartbeat that ends in a climb (draws once) */
+.horizon--ekg svg{height:64px}
+.ekg-line,.ekg-rise{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0;vector-effect:non-scaling-stroke}
+.ekg-line{stroke:var(--ink-900);stroke-width:2}
+.ekg-rise{stroke:var(--accent);stroke-width:3.5}
+.js .ekg-line{stroke-dashoffset:1;animation:draw 2.6s cubic-bezier(.4,.1,.3,1) .3s forwards}
+.js .ekg-rise{stroke-dashoffset:1;animation:draw .8s var(--ease-out) 2.8s forwards}
+.js .ekg-head{animation-delay:3.5s;animation-duration:.3s}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ---------- Rail animations (inside the "What I did" timeline) ---------- */
+.rail{position:relative}
+.rail .step__rail{position:relative;z-index:1}
+.rail-art{position:absolute;left:0;top:0;width:44px;height:100%;pointer-events:none}
+.rail-track{position:absolute;left:0;top:22px;width:44px;height:var(--rail-h,300px);z-index:2}
+.rail--plane .rail-track{top:48px;height:calc(var(--rail-h,300px) - 54px)}
+.rail-mover{height:100%}
+/* Paper airplane (All for Kids) */
+.rail--plane .step__line{background:transparent}
+.rail-trail{position:absolute;left:-6px;top:48px;width:56px;height:calc(var(--rail-h,300px) - 54px);overflow:visible}
+.trail-dots{fill:none;stroke:var(--ink-900);stroke-width:3;stroke-linecap:round;stroke-dasharray:0 10;vector-effect:non-scaling-stroke}
+.rail-sway{position:absolute;left:6px;top:-12px;width:32px;height:24px}
+.rail-plane{display:block;width:32px;height:24px;overflow:visible;transform:rotate(90deg)}
+.plane-body{fill:var(--paper-0);stroke:var(--ink-900);stroke-width:2;stroke-linejoin:round}
+.rail-crumple{position:absolute;left:-2px;top:calc(var(--rail-h,300px) - 22px);width:48px;height:24px;z-index:3;overflow:visible;opacity:0}
+.crumple-shadow{fill:var(--ink-900);opacity:.12}
+.crumple-dust{stroke:var(--ink-500)}
+/* Construction crew (Indian Head Canoes) */
+.worker{width:44px;height:60px;overflow:visible}
+.worker--a{position:absolute;left:0;top:-58px}
+.rail--build .rail-track{top:44px;height:calc(var(--rail-h,300px) - 44px)}
+.worker--b{position:absolute;left:-46px;top:-54px}
+.hammer{transform-box:view-box;transform-origin:22px 34px;animation:hammer .5s ease-in-out infinite alternate}
+@keyframes hammer{from{transform:rotate(-30deg)}to{transform:rotate(18deg)}}
+.leg-a{transform-box:view-box;transform-origin:22px 46px;animation:walk .4s ease-in-out infinite alternate}
+.leg-b{transform-box:view-box;transform-origin:22px 46px;animation:walk .4s ease-in-out infinite alternate-reverse}
+@keyframes walk{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
+.spark-burst{position:absolute;left:30px;top:-16px;width:24px;height:24px;animation:spark .5s steps(1) infinite}
+@keyframes spark{50%{opacity:0}}
+
+/* Scroll-driven motion. Without support: finished static state. */
+@supports (animation-timeline:view()){
+  .rail{view-timeline-name:--rail}
+  .rail--plane .rail-trail,.rail--plane .rail-mover,.rail--plane .rail-sway,.rail--plane .rail-crumple,
+  .rail--build .rail-mover,.rail--build .step__num,.rail--build .step:first-child .step__line{animation-timeline:--rail;animation-fill-mode:both;animation-timing-function:linear}
+  .rail--plane .rail-trail{animation-name:trail-reveal;animation-range:cover 22% cover 62%}
+  .rail--plane .rail-mover,.rail--build .rail-mover{animation-name:rail-down;animation-range:cover 22% cover 62%}
+  .rail--plane .rail-sway{animation-name:plane-sway;animation-range:cover 22% cover 62%}
+  .rail--plane .rail-crumple{animation-name:crumple;animation-range:cover 22% cover 62%}
+  .rail--build .step__num{animation-name:build-in;animation-range:cover 18% cover 28%}
+  .rail--build .step:last-child .step__num{animation-range:cover 52% cover 62%}
+  .rail--build .step:first-child .step__line{transform-origin:top;animation-name:grow-line;animation-range:cover 28% cover 52%}
+  .rail--build .rail-mover{animation-range:cover 28% cover 52%}
+}
+@keyframes rail-down{from{transform:translateY(0)}to{transform:translateY(100%)}}
+@keyframes trail-reveal{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes plane-sway{
+  0%{transform:translateX(0) rotate(-35deg)}8.33%{transform:translateX(20px) rotate(0)}16.67%{transform:translateX(0) rotate(35deg)}
+  25%{transform:translateX(-20px) rotate(0)}33.33%{transform:translateX(0) rotate(-35deg)}41.67%{transform:translateX(20px) rotate(0)}
+  50%{transform:translateX(0) rotate(35deg)}58.33%{transform:translateX(-20px) rotate(0)}66.67%{transform:translateX(0) rotate(-35deg)}
+  75%{transform:translateX(20px) rotate(0)}83.33%{transform:translateX(0) rotate(35deg)}91.67%{transform:translateX(-20px) rotate(0);opacity:1}
+  96%{transform:translateX(-8px) rotate(20deg);opacity:1}100%{transform:translateX(0) rotate(60deg);opacity:0}}
+@keyframes crumple{0%,95%{opacity:0;transform:translateY(-10px) rotate(-18deg)}98%{opacity:1;transform:translateY(1px) rotate(3deg)}100%{opacity:1;transform:none}}
+@keyframes build-in{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes grow-line{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@media (max-width:900px){.rail-art{display:none}.rail--plane .step__line{background:var(--ink-900)}}
+
+/* ---------- Google page climb (healthcare results) ---------- */
+.pager{max-width:880px;display:flex;flex-direction:column;gap:18px}
+.pager__head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.pager__pos{font-family:var(--font-mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-300)}
+.pager__num{display:inline-block;min-width:4ch;font-family:var(--font-display);font-size:40px;letter-spacing:-.03em;color:var(--accent);text-align:right;font-variant-numeric:tabular-nums;vertical-align:-6px}
+.pager__track{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border:1.5px solid var(--ink-600)}
+.pager__cell{display:flex;flex-direction:column;gap:6px;padding:18px 14px;border-left:1px solid var(--ink-700);transition:background 400ms var(--ease-out) 1.9s}
+.pager__cell:first-child{border-left:0}
+.pager__pg{font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--paper-50)}
+.pager__rng{font-family:var(--font-mono);font-size:11px;color:var(--ink-400)}
+.pager__marker{position:absolute;top:-8px;bottom:-8px;left:0;width:calc(100% / 6);border:2.5px solid var(--accent);transform:translateX(0)}
+.pager__dot{position:absolute;right:10px;top:10px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.js .pager__marker{transform:translateX(500%);transition:transform 1.8s cubic-bezier(.3,.7,.2,1) .2s}
+.js .pager.is-in .pager__marker{transform:translateX(0)}
+.pager.is-in .pager__cell--p1,.pager__cell--p1{background:rgba(255,74,28,.14)}
+.js .pager__cell--p1{background:transparent}
+.js .pager.is-in .pager__cell--p1{background:rgba(255,74,28,.14)}
+.pager__note{font-size:14px}
+@media (max-width:760px){.pager__rng{display:none}.pager__cell{padding:14px 8px}.pager__pg{font-size:10px}}
+
+/* ---------- Search results climb (River Expeditions results) ---------- */
+.climb-wrap{max-width:880px}
+.band .serp{box-shadow:var(--shadow-offset-accent)}
+.climb-note{font-size:14px;margin-top:20px;max-width:560px}
+.sc-list{position:relative;height:292px;overflow:hidden}
+.sc-row,.sc-client{position:absolute;left:0;right:0;top:0;height:44px;display:flex;align-items:center;gap:14px;transform:translateY(var(--y1))}
+.sc-row{border-bottom:1px solid var(--paper-200)}
+.sc-row .sk{flex:1;max-width:70%}
+.sk--50{width:50%}
+.sc-client{height:42px;padding:0 10px;background:var(--surface-card);border:1.5px solid var(--ink-900);z-index:1}
+.sc-client .serp__ttl{min-width:0}
+.sc-client small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc-divider{position:absolute;left:0;right:0;height:28px;display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--text-muted)}
+.sc-divider::after{content:"";flex:1;border-top:1.5px dashed var(--ink-300)}
+.js .sc-row,.js .sc-client{transform:translateY(var(--y0));transition:transform 1400ms cubic-bezier(.3,.7,.2,1) 300ms}
+.js .sc-client{transition-duration:1600ms}
+.js .serp--climb.is-in .sc-row,.js .serp--climb.is-in .sc-client{transform:translateY(var(--y1))}
+
+/* ---------- Typed search query with blinking caret ---------- */
+.serp__q::after{content:"";display:inline-block;width:1.5px;height:1.15em;margin-left:2px;vertical-align:-3px;background:var(--ink-900);animation:caret 1s steps(1) infinite}
+@keyframes caret{50%{opacity:0}}
+
+/* ---------- Paper-airplane ranking table (All for Kids) ---------- */
+.flight{position:relative;display:flex;flex-direction:column;max-width:880px}
+.fl-head,.fl-row{display:grid;grid-template-columns:minmax(0,5fr) 96px minmax(90px,4fr) 56px;align-items:center;column-gap:18px}
+.fl-head{padding-bottom:10px;border-bottom:var(--rule-bold) solid var(--paper-50);font-family:var(--font-mono);font-size:var(--label-sm);letter-spacing:var(--label-tracking);text-transform:uppercase;color:var(--ink-400)}
+.fl-head span:nth-child(2),.fl-head span:nth-child(4){text-align:right}
+.fl-row{padding:12px 0;border-bottom:1px solid var(--ink-700)}
+.fl-kw{font-size:15px;color:var(--paper-50)}
+.fl-b{text-align:right;font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--ink-300);font-variant-numeric:tabular-nums}
+.fl-nr{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-400)}
+.fl-a{text-align:right;font-family:var(--font-mono);font-size:17px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.fl-lane{position:relative;height:28px}
+.fl-mover{position:absolute;left:0;top:0;bottom:0;width:calc(100% - 38px);transform:translateX(100%)}
+.fl-bob{position:absolute;left:0;top:-1px;width:38px;height:30px;animation:fl-bob 1.6s ease-in-out infinite;animation-delay:calc(var(--i) * -230ms)}
+@keyframes fl-bob{0%,100%{transform:translate(0,0) rotate(-6deg)}50%{transform:translate(2px,-4px) rotate(-12deg)}}
+.fl-plane{display:block;width:38px;height:30px;overflow:visible}
+.flight .plane-body{fill:var(--paper-0);stroke:var(--ink-900)}
+.fl-wind{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.fl-wind i{position:absolute;left:0;width:100%;height:1.5px;animation:fl-wind 1.3s linear infinite}
+.fl-wind i::before{content:"";position:absolute;left:0;top:0;width:22px;height:100%;border-radius:2px;background:rgba(246,243,237,.45)}
+.fl-wind i:nth-child(1){top:6px;animation-delay:calc(var(--i) * -170ms)}
+.fl-wind i:nth-child(2){top:14px;animation-duration:1.7s;animation-delay:calc(var(--i) * -290ms - 400ms)}
+.fl-wind i:nth-child(3){top:22px;animation-duration:1.1s;animation-delay:calc(var(--i) * -110ms - 800ms)}
+.fl-wind i:nth-child(2)::before{width:34px;background:rgba(143,186,203,.55)}
+@keyframes fl-wind{from{transform:translateX(100%)}to{transform:translateX(-30%)}}
+.fl-gust{position:absolute;right:0;top:-54px;width:200px;height:60px;overflow:visible}
+.gust{fill:none;stroke:var(--ink-500);stroke-width:2;stroke-linecap:round;stroke-dasharray:60 400;animation:gust 3.2s linear infinite}
+.gust--b{stroke:var(--water-deep);animation-duration:2.6s;animation-delay:-1.2s}
+@keyframes gust{from{stroke-dashoffset:60}to{stroke-dashoffset:-400}}
+.js .fl-mover{transform:translateX(0);transition:transform 1.5s cubic-bezier(.4,.1,.25,1) calc(var(--i) * 150ms + 200ms)}
+.js .flight.is-in .fl-mover{transform:translateX(100%)}
+.js .fl-a{opacity:0;transform:translateY(6px);transition:opacity .35s var(--ease-out) calc(var(--i) * 150ms + 1500ms),transform .35s var(--ease-out) calc(var(--i) * 150ms + 1500ms)}
+.js .flight.is-in .fl-a{opacity:1;transform:none}
+@media (max-width:760px){.fl-head,.fl-row{grid-template-columns:minmax(0,1fr) 58px 64px 40px;column-gap:10px}.fl-kw{font-size:13px}.fl-gust{display:none}.fl-nr{font-size:9px}}
+
+/* ---------- Thinker (healthcare "What I did" timeline) ---------- */
+.rail--think .step__rail{z-index:1}
+.thinker{position:absolute;left:-74px;top:-58px;width:64px;height:86px;overflow:visible}
+.th-sym text{font-family:var(--font-display);font-size:18px;font-weight:700;fill:var(--accent)}
+.th-sym circle{fill:var(--accent)}
+.th-bang path{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round}
+.th-hand{fill:var(--paper-0);stroke:var(--ink-900);stroke-width:2}
+/* Default (no scroll-timeline support): the "aha" pose */
+.th-q,.th-dots,.th-hmm{opacity:0}
+.th-upper{transform-box:view-box;transform-origin:30px 41px;transform:rotate(-84deg)}
+.th-fore{transform-box:view-box;transform-origin:39px 50px;transform:rotate(112deg)}
+.th-head{transform-box:view-box;transform-origin:30px 36px}
+.thinker .leg-a,.thinker .leg-b{animation:none}
+@supports (animation-timeline:view()){
+  .rail--think .rail-mover,.th-q,.th-dots,.th-bang,.th-upper,.th-fore,.th-hand,.th-head,.th-hmm,.th-smile,.thinker .leg-a,.thinker .leg-b{
+    animation-timeline:--rail;animation-range:cover 22% cover 62%;animation-fill-mode:both;animation-timing-function:linear}
+  .rail--think .rail-mover{animation-name:rail-down}
+  .th-q{animation-name:th-q}
+  .th-dots{animation-name:th-dots}
+  .th-bang{animation-name:th-bang}
+  .th-upper{animation-name:th-upper}
+  .th-fore{animation-name:th-fore}
+  .th-hand{animation-name:th-rub}
+  .th-head{animation-name:th-head}
+  .th-hmm{animation-name:th-hmm}
+  .th-smile{animation-name:th-smile}
+  .thinker .leg-a{animation-name:th-walk}
+  .thinker .leg-b{animation-name:th-walk-b}
+}
+@keyframes th-q{0%,32%{opacity:1;transform:none}42%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes th-dots{0%,38%{opacity:0}48%,64%{opacity:1}72%,100%{opacity:0}}
+@keyframes th-bang{0%,70%{opacity:0;transform:scale(.4)}78%{opacity:1;transform:scale(1.25)}84%,100%{opacity:1;transform:scale(1)}}
+@keyframes th-upper{0%,40%{transform:rotate(0)}80%,100%{transform:rotate(-84deg)}}
+@keyframes th-fore{0%,40%{transform:rotate(0)}80%,100%{transform:rotate(112deg)}}
+@keyframes th-rub{0%{transform:translate(0,0)}5%{transform:translate(2px,1px)}10%{transform:translate(-1px,0)}15%{transform:translate(2px,1px)}20%{transform:translate(-1px,0)}25%{transform:translate(2px,1px)}30%{transform:translate(-1px,0)}35%,100%{transform:translate(0,0)}}
+@keyframes th-head{0%,36%{transform:rotate(9deg)}76%,100%{transform:rotate(-3deg)}}
+@keyframes th-hmm{0%,70%{opacity:1}76%,100%{opacity:0}}
+@keyframes th-smile{0%,72%{opacity:0}78%,100%{opacity:1}}
+@keyframes th-walk{0%,40%{transform:rotate(0)}44%{transform:rotate(-14deg)}48%{transform:rotate(14deg)}52%{transform:rotate(-14deg)}56%{transform:rotate(14deg)}60%{transform:rotate(-14deg)}64%{transform:rotate(14deg)}68%{transform:rotate(-14deg)}72%,100%{transform:rotate(0)}}
+@keyframes th-walk-b{0%,40%{transform:rotate(0)}44%{transform:rotate(14deg)}48%{transform:rotate(-14deg)}52%{transform:rotate(14deg)}56%{transform:rotate(-14deg)}60%{transform:rotate(14deg)}64%{transform:rotate(-14deg)}68%{transform:rotate(14deg)}72%,100%{transform:rotate(0)}}
+.th-smile{opacity:1}
