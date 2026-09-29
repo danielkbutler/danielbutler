@@ -271,7 +271,7 @@ a:hover{color:var(--accent-hover)}
 .footer__h{font-size:var(--display-1);line-height:var(--display-leading);letter-spacing:var(--display-tracking);color:var(--paper-50);max-width:860px}
 .footer__bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--border-inverse);padding-top:16px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-400)}
 
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}.js .ba__fill{width:var(--w)}.js .card{opacity:1;translate:none}.js .hero__h .hl{background-size:100% 32%}.serp__q::after,.fl-bob,.fl-wind i,.gust{animation:none!important}.js .fl-mover{transform:translateX(100%)}.js .fl-a{opacity:1;transform:none}.js .serp__client{transform:none}.js .serp__aio>*{opacity:1}.js .sc-row,.js .sc-client{transform:translateY(var(--y1))}.river__mover{animation:none!important}.horizon *,.rail-art *,.rail .step__num,.rail .step__line{animation:none!important}.js .pager__marker{transform:none}.rail-crumple{opacity:1}.rail-sway{opacity:0}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}.js .ba__fill{width:var(--w)}.js .card{opacity:1;translate:none}.js .hero__h .hl{background-size:100% 32%}.serp__q::after,.fl-bob,.fl-wind i,.gust{animation:none!important}.js .fl-mover{transform:translateX(100%)}.js .fl-a{opacity:1;transform:none}.js .serp__client{transform:none}.js .serp__aio>*{opacity:1}.js .sc-row,.js .sc-client{transform:translateY(calc(var(--s1) * var(--slot) + var(--p1) * var(--gap)))}.river__mover{animation:none!important}.horizon *,.rail-art *,.rail .step__num,.rail .step__line{animation:none!important}.js .pager__marker{transform:none}.rail-crumple{opacity:1}.rail-sway{opacity:0}}
 @media print{.nav,.footer,.btn{display:none!important}.band{background:none;color:var(--ink-900)}}
 
 /* ---------- Step column aligned to section eyebrow ---------- */
@@ -349,7 +349,7 @@ a:hover{color:var(--accent-hover)}
 
 /* ---------- Search results climb (healthcare case study) ---------- */
 .serp{margin:0;background:var(--surface-card);border:1.5px solid var(--ink-900);box-shadow:var(--shadow-offset);padding:20px;display:flex;flex-direction:column;gap:14px;max-width:560px}
-.serp__bar{display:flex;align-items:center;gap:10px;height:40px;padding:0 16px;border:1.5px solid var(--ink-300);border-radius:var(--radius-pill);font-family:var(--font-mono);font-size:12px;color:var(--text-muted)}
+.serp__bar{display:flex;align-items:center;gap:10px;min-height:40px;padding:7px 16px;border:1.5px solid var(--ink-300);border-radius:22px;font-family:var(--font-mono);font-size:12px;color:var(--text-muted)}
 .serp__bar svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--ink-500);stroke-width:2;stroke-linecap:round}
 .serp__aio{display:flex;flex-direction:column;gap:8px;padding:14px 16px;background:var(--accent-tint);border:1px solid var(--vermilion-100)}
 .serp__tag{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--vermilion-700)}
@@ -401,8 +401,8 @@ a:hover{color:var(--accent-hover)}
 /* Scroll-driven: the raft drifts down as the steps scroll through view.
    Browsers without scroll timelines keep the raft parked at the top. */
 @supports (animation-timeline:view()){
-  .river{view-timeline-name:--river}
-  .river__mover{animation:raft-drift linear both;animation-timeline:--river;animation-range:entry 70% exit 30%}
+  .river{view-timeline-name:--rail}
+  .river__mover{animation:raft-drift linear both;animation-timeline:--rail;animation-range:entry 70% exit 30%}
   .river__raft{animation:raft-bob 2.4s ease-in-out infinite}
 }
 @keyframes raft-drift{from{transform:translateY(0)}to{transform:translateY(100%)}}
@@ -547,19 +547,20 @@ a:hover{color:var(--accent-hover)}
 .climb-wrap{max-width:880px}
 .band .serp{box-shadow:var(--shadow-offset-accent)}
 .climb-note{font-size:14px;margin-top:20px;max-width:560px}
-.sc-list{position:relative;height:292px;overflow:hidden}
-.sc-row,.sc-client{position:absolute;left:0;right:0;top:0;height:44px;display:flex;align-items:center;gap:14px;transform:translateY(var(--y1))}
+.sc-list{--slot:44px;--gap:28px;position:relative;height:calc(6 * var(--slot) + var(--gap));overflow:hidden}
+.sc-row,.sc-client{position:absolute;left:0;right:0;top:0;height:var(--slot);display:flex;align-items:center;gap:14px;transform:translateY(calc(var(--s1) * var(--slot) + var(--p1) * var(--gap)))}
 .sc-row{border-bottom:1px solid var(--paper-200)}
 .sc-row .sk{flex:1;max-width:70%}
 .sk--50{width:50%}
-.sc-client{height:42px;padding:0 10px;background:var(--surface-card);border:1.5px solid var(--ink-900);z-index:1}
+.sc-client{height:calc(var(--slot) - 2px);padding:0 12px;background:var(--surface-card);border:1.5px solid var(--ink-900);z-index:1}
 .sc-client .serp__ttl{min-width:0}
-.sc-client small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sc-divider{position:absolute;left:0;right:0;height:28px;display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--text-muted)}
+.sc-client .serp__t,.sc-client small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc-client .serp__ttl{gap:2px;flex:1}
+.sc-divider{position:absolute;left:0;right:0;top:calc(5 * var(--slot));height:var(--gap);display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--text-muted)}
 .sc-divider::after{content:"";flex:1;border-top:1.5px dashed var(--ink-300)}
-.js .sc-row,.js .sc-client{transform:translateY(var(--y0));transition:transform 1400ms cubic-bezier(.3,.7,.2,1) 300ms}
+.js .sc-row,.js .sc-client{transform:translateY(calc(var(--s0) * var(--slot) + var(--p0) * var(--gap)));transition:transform 1400ms cubic-bezier(.3,.7,.2,1) 300ms}
 .js .sc-client{transition-duration:1600ms}
-.js .serp--climb.is-in .sc-row,.js .serp--climb.is-in .sc-client{transform:translateY(var(--y1))}
+.js .serp--climb.is-in .sc-row,.js .serp--climb.is-in .sc-client{transform:translateY(calc(var(--s1) * var(--slot) + var(--p1) * var(--gap)))}
 
 /* ---------- Typed search query with blinking caret ---------- */
 .serp__q::after{content:"";display:inline-block;width:1.5px;height:1.15em;margin-left:2px;vertical-align:-3px;background:var(--ink-900);animation:caret 1s steps(1) infinite}
@@ -640,3 +641,16 @@ a:hover{color:var(--accent-hover)}
 @keyframes th-walk{0%,40%{transform:rotate(0)}44%{transform:rotate(-14deg)}48%{transform:rotate(14deg)}52%{transform:rotate(-14deg)}56%{transform:rotate(14deg)}60%{transform:rotate(-14deg)}64%{transform:rotate(14deg)}68%{transform:rotate(-14deg)}72%,100%{transform:rotate(0)}}
 @keyframes th-walk-b{0%,40%{transform:rotate(0)}44%{transform:rotate(14deg)}48%{transform:rotate(-14deg)}52%{transform:rotate(14deg)}56%{transform:rotate(-14deg)}60%{transform:rotate(14deg)}64%{transform:rotate(-14deg)}68%{transform:rotate(14deg)}72%,100%{transform:rotate(0)}}
 .th-smile{opacity:1}
+
+/* Search illustrations on phones: taller result slots and more breathing room */
+@media (max-width:760px){
+  .serp{padding:16px}
+  .sc-list{--slot:62px;--gap:30px}
+  .sc-client{padding:0 14px;gap:12px}
+  .sc-client .serp__ttl{font-size:14px;line-height:1.3;gap:4px}
+  .sc-client small{font-size:11.5px}
+  .serp__list{grid-template-rows:repeat(3,48px) 70px 70px}
+  .serp__client{top:150px;height:58px;padding:0 14px;gap:12px}
+  .js .serp__client{transform:translateY(70px)}
+  .serp__ttl small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
